@@ -8,17 +8,17 @@ import java.util.concurrent.*;
 public class Workers {
     private File[] files;
     private String pattern, type;
-    private Worker search;
-    public Workers(String nameFolder,byte[] pattern){
+    private GroupWorker  search;
+    public Workers(String nameFolder,String namePattern){
         files = new File(nameFolder).listFiles();
-        search = new Worker(pattern);
+        search = new GroupWorker(namePattern);
     }
 
 
 
     private Callable<Response> worker(File file){
-        return search.task(file);
-    }
+         return search.task(file);
+     }
     public Response[]   start(){
 
         ExecutorService executors = Executors.newFixedThreadPool(files.length);

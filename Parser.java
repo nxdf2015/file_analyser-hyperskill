@@ -18,7 +18,7 @@ public class Parser {
 
        fileName = args[0];
        pattern = args[1];
-       type = args[2];
+
     }
 
     public Map<String, String> getOptions() {
@@ -33,7 +33,5 @@ public class Parser {
         return pattern;
     }
 
-    public String getType() {
-        return type;
-    }
+
 }

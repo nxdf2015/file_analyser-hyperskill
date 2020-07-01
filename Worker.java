@@ -20,6 +20,8 @@ public class Worker {
                 byte[] bytes;
                 try(BufferedInputStream in  = new BufferedInputStream(new FileInputStream(file))) {
                     bytes  = in.readAllBytes();
+
+
                     return  Response.of(file.getName() , search.find(bytes,pattern));
 
 
