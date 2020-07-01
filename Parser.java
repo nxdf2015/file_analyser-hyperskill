@@ -15,18 +15,14 @@ public class Parser {
     }
 
     public void parse(String[] args){
-       algorithme = args[0].substring(2,args[0].length());
-       fileName = args[1];
-       pattern = args[2];
-       type = args[3];
+
+       fileName = args[0];
+       pattern = args[1];
+       type = args[2];
     }
 
     public Map<String, String> getOptions() {
         return options;
-    }
-
-    public String getAlgorithme() {
-        return algorithme;
     }
 
     public String getFileName() {

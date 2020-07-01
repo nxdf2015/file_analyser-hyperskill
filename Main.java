@@ -12,31 +12,21 @@ public class Main {
             String nameFile = parser.getFileName();
             String pattern = parser.getPattern();
             String type = parser.getType();
-            String algorithme = parser.getAlgorithme();
+            String algorithme = "kmp";
 
             byte[]  model = pattern.substring(0,pattern.length()-1).trim().getBytes();
             byte[] bytes = null;
-            Search search = Search.create(algorithme);
-            TimeSearch timeSearch = new TimeSearch(search);
 
-            try(BufferedInputStream in  = new BufferedInputStream(new FileInputStream(new File(nameFile)))) {
-                 bytes  = in.readAllBytes();
+            Workers workers = new Workers(nameFile,model);
 
-               boolean find = timeSearch.find(bytes,model);
+            Response[] responses = workers.start();
 
-                if (find){
-                    System.out.println(type);
-                }
-                else {
-                    System.out.println("Unknown file type");
-                }
-                System.out.println("it took "+timeSearch.getTimeSearch().withMinute(0).withHour(0)+" seconds");
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            for(Response response : responses){
+                String resultSearch = response.isFind() ? type : "Unknown file type";
+                System.out.printf(response.getName()+": "+resultSearch );
+                System.out.println();
             }
+
 
 
 
